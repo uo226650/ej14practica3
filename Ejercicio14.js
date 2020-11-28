@@ -13,7 +13,7 @@ class Lector {
         else {
             var error = document.createElement("p");
             error.innerText="El contenido de este archivo no se puede traducir debido a su formato";
-            document.getElementById("drop_zone").append(error);
+            document.getElementById("drop_zone").after(error);
         }
         //this.cargaContenido();
     }
@@ -76,7 +76,6 @@ class Traductor {
         }
         document.getElementById("original").value = this.texto;
         document.getElementById("traduccion").value = resultado;
-        //lienzo = new Lienzo();
         morse = new Morse(resultado);
     }
 }
@@ -162,10 +161,7 @@ class Morse {
  */
 class DragDropManager {
     dropHandler(ev) {
-        console.log('Fichero(s) arrastrados');
-
-        // Evitar el comportamiendo por defecto (Evitar que el fichero se abra/ejecute)
-        ev.preventDefault();
+        ev.preventDefault(); //Evita el comportamiendo por defecto
 
         if (ev.dataTransfer.items) {
             // Usar la interfaz DataTransferItemList para acceder a el/los archivos)
@@ -174,33 +170,22 @@ class DragDropManager {
                 if (ev.dataTransfer.items[i].kind === 'file') {
                     var file = ev.dataTransfer.items[i].getAsFile();
                     console.log('... file[' + i + '].name = ' + file.name);
-                    console.log("funcion")
+                    //document.getElementById("drop_zone").placeholder = file.name;
                     lector.leerArchivoAudio(ev.dataTransfer.files);
                 }
             }
-        } else {
-            // Usar la interfaz DataTransfer para acceder a el/los archivos
-            /*for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-                console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
-
-            }*/
-            console.log("funcion")
-            lector.leerArchivoAudio(ev.dataTransfer.files[0]);
-        }
+        } 
 
         // Pasar el evento a removeDragData para limpiar
         this.removeDragData(ev)
     }
 
     dragOverHandler(ev) {
-        console.log('File(s) in drop zone');
 
-        // Prevent default behavior (Prevent file from being opened)
         ev.preventDefault();
     }
 
     removeDragData(ev) {
-        console.log('Removing drag data')
 
         if (ev.dataTransfer.items) {
             // Use DataTransferItemList interface to remove the drag data

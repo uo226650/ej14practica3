@@ -1,13 +1,15 @@
-#lienzo{
-    background-color: rgb(194, 219, 194);
+body, label, textarea{
+    display:block;
 }
 
 #drop_zone {
-    border: thin solid black;
+    border: thin dotted grey;
     width:  20em;
-    height: 10em;
+    height: 8em;
   }
 
-  #traduccion {
-      width: 20em;
+  textarea {
+    overflow: scroll;
+      height: auto;
+      width: 40em;
   }
