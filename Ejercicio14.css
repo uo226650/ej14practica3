@@ -1,0 +1,13 @@
+#lienzo{
+    background-color: rgb(194, 219, 194);
+}
+
+#drop_zone {
+    border: thin solid black;
+    width:  20em;
+    height: 10em;
+  }
+
+  #traduccion {
+      width: 20em;
+  }

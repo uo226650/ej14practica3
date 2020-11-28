@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Traductor Morse</title>
+    <meta charset="UTF-8">
+    <script src="Ejercicio14.js"></script>
+    <link rel="stylesheet" href="Ejercicio14.css" type="text/css">
+</head>
+
+<body>
+    <h1>Traductor Morse</h1>
+    <label for="archivoAudio">Seleccione un archivo de texto para traducir: </label>
+    <input type="file" id="archivoAudio" onchange="lector.leerArchivoAudio(this.files);">
+    <div id="drop_zone" ondrop="dragDropManager.dropHandler(event);"
+        ondragover="dragDropManager.dragOverHandler(event);">
+        <p>Arrastra y suelta un archivo de texto a esta zona ...</p>
+    </div>
+    <!--button onclick="audio.reproducir()">Play</button>Idea anterior-->
+    <!--button onclick="traductor.traducir('this')">Traducir</button-->
+    
+    <label for="original">Texto original: </label>
+
+    <textarea id="original">Traducción:</textarea>
+    <label for="traduccion">Código morse: </label>
+
+    <textarea id="traduccion">Traducción</textarea>
+    <button onclick="morse.reproducir()">Escuchar</button>
+    <!--canvas id="lienzo" width="600" height="500">
+    </canvas-->
+
+
+</body>
+
+</html>
