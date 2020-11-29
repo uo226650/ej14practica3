@@ -106,7 +106,7 @@ class Morse {
         this.tono.frequency.value = 750; 
         this.tono.connect(this.ganancia); //Conectamos el objeto ganancia al objeto oscilador
         this.ganancia.connect(this.audioContext.destination); //Conectamos el output a la ganancia
-        this.duracion = 1.2 /5/// 15;
+        this.duracion = 1.2 / 15;
         this.tono.start(0); //Iniciamos el oscilador en este momento (tiempo=0), pero será inaudible porque la ganancia es 0 
     }
 
@@ -121,32 +121,27 @@ class Morse {
                 case '.':
 
                     this.subirGanacia(tiempo);
-
+                    if (window.navigator && window.navigator.vibrate) {
+                        navigator.vibrate(80); // API Vibration
+                     } else {
+                        alert("Vibración no soportada");
+                     }
                     
                     this.bajarGanacia(tiempo+= this.duracion); //Baja ganancia transcurrida la duración
                     tiempo += this.duracion;
-                    if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(); // API Vibration
-                     } else {
-                        alert("Vibración no soportada");
-                     }
                     break;
 
                 case '-':
-                    navigator.vibrate(0);
+
                     this.subirGanacia(tiempo); //Sube la ganancia ahora
                     tiempo += 3 * this.duracion; //Tres veces la duración del punto
-                    if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(); // API Vibration
-                     } else {
-                        alert("Vibración no soportada");
-                     }
+                    navigator.vibrate(240);
                     this.bajarGanacia(tiempo) //Baja la ganancia transcurrida esa duración de raya
                     tiempo += this.duracion; //Resetea 'tiempo' a la duración del punto
                     break;
 
                 case " ":
-                    navigator.vibrate(0);
+
                     tiempo += 7 * this.duracion;
                     break;
             }
