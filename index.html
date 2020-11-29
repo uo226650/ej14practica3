@@ -12,6 +12,7 @@
     <h1>Traductor Morse</h1>
     <label for="archivoAudio">Seleccione o arrastre un archivo de texto para traducir: </label>
     <input type="file" id="archivoAudio" onchange="lector.leerArchivoAudio(this.files);">
+    <label for="drop_zone">Carga Archivo: </label>
     <textarea id="drop_zone" ondrop="dragDropManager.dropHandler(event);"
         ondragover="dragDropManager.dragOverHandler(event);"
         placeholder="Arrastra y suelta un archivo de texto a esta zona ..."></textarea>
@@ -23,9 +24,6 @@
 
     <textarea id="traduccion" placeholder="Traduccion a codigo morse" disabled></textarea>
     <button onclick="morse.reproducir()">Escuchar</button>
-    <!--canvas id="lienzo" width="600" height="500">
-    </canvas-->
-
 
 </body>
 
