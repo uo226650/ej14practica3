@@ -99,6 +99,7 @@ class Morse {
      * Oscilador que genera un tono (onda periódica)
      */
     crearContexto() {
+        var AudioContext = window.AudioContext || window.webkitAudioContext; //Para que lo soporte Safari
         this.audioContext = new AudioContext(); //Creamos objeto contexto de audio
         this.tono = this.audioContext.createOscillator(); //Creamos objeto oscilador
         this.ganancia = this.audioContext.createGain(); //Creamos objeto ganancia
@@ -121,11 +122,11 @@ class Morse {
                 case '.':
 
                     this.subirGanacia(tiempo);
-                    if (window.navigator && window.navigator.vibrate) {
+                    /*if (window.navigator && window.navigator.vibrate) {
                         navigator.vibrate(80); // API Vibration
                      } else {
                         alert("Vibración no soportada");
-                     }
+                     }*/
                     
                     this.bajarGanacia(tiempo+= this.duracion); //Baja ganancia transcurrida la duración
                     tiempo += this.duracion;
@@ -135,7 +136,7 @@ class Morse {
 
                     this.subirGanacia(tiempo); //Sube la ganancia ahora
                     tiempo += 3 * this.duracion; //Tres veces la duración del punto
-                    navigator.vibrate(240);
+                    /*navigator.vibrate(240);*/
                     this.bajarGanacia(tiempo) //Baja la ganancia transcurrida esa duración de raya
                     tiempo += this.duracion; //Resetea 'tiempo' a la duración del punto
                     break;
