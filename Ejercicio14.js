@@ -126,7 +126,7 @@ class Morse {
                     this.bajarGanacia(tiempo+= this.duracion); //Baja ganancia transcurrida la duración
                     tiempo += this.duracion;
                     if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(8); // API Vibration
+                        navigator.vibrate(80); // API Vibration
                      } else {
                         alert("Vibración no soportada");
                      }
@@ -137,7 +137,7 @@ class Morse {
                     this.subirGanacia(tiempo); //Sube la ganancia ahora
                     tiempo += 3 * this.duracion; //Tres veces la duración del punto
                     if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(24); // API Vibration
+                        navigator.vibrate(240); // API Vibration
                      } else {
                         alert("Vibración no soportada");
                      }
