@@ -121,7 +121,12 @@ class Morse {
                 case '.':
 
                     this.subirGanacia(tiempo);
-                    navigator.vibrate(this.duracion); // API Vibration
+                    if (window.navigator && window.navigator.vibrate) {
+                        navigator.vibrate(80); // API Vibration
+                     } else {
+                        alert("Vibración no soportada");
+                     }
+                    
                     this.bajarGanacia(tiempo+= this.duracion); //Baja ganancia transcurrida la duración
                     tiempo += this.duracion;
                     break;
@@ -130,7 +135,7 @@ class Morse {
 
                     this.subirGanacia(tiempo); //Sube la ganancia ahora
                     tiempo += 3 * this.duracion; //Tres veces la duración del punto
-                    navigator.vibrate(3*this.duracion);
+                    navigator.vibrate(240);
                     this.bajarGanacia(tiempo) //Baja la ganancia transcurrida esa duración de raya
                     tiempo += this.duracion; //Resetea 'tiempo' a la duración del punto
                     break;
