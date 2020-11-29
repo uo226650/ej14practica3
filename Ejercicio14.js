@@ -1,9 +1,22 @@
 /**
+ * Aplicación para convertir textos a código morse en formato textual y auditivo
+ * 
+ * Hace uso de la API FILE para cargar archivos de texto desde la máquina del cliente
+ * Así mismo ofrece la opción de arrastrar los archivos que desean ser cargados
+ * mediante la API DRAG and DROP.
+ * 
+ * El código morse se reproduce en formato de audio gracias a la configuración
+ * de un oscilador a través de la API Web Audio
+ * 
+ */
+
+
+/**
  * Carga archivos desde la máquina cliente con API File
  */
 class Lector {
 
-    leerArchivoAudio(files) {
+    leerArchivo(files) {
         this.archivo = files[0];
         //Solamente admite archivos de tipo texto
         var tipoTexto = /text.*/;
@@ -27,6 +40,9 @@ class Lector {
         }
     }
 
+    /**
+     * Envía los datos leídos a un objeto traductor para su procesado
+     */
     cargaContenido() {
         var lector = new FileReader();
         lector.onload = function (evento) {
@@ -34,6 +50,16 @@ class Lector {
             traductor.traducir();
         }
         lector.readAsText(this.archivo);    
+    }
+
+    /**
+     * Pide al traductor la traducción directa del area de texto editable por el usuario
+     * Accionado por el botón "Traducir"
+     */
+    traducirInput(){
+        var texto = document.getElementById("original").value;
+        traductor = new Traductor(texto);
+        traductor.traducir();
     }
 
 }
@@ -47,16 +73,6 @@ class Traductor {
     constructor(texto) {
         this.texto = texto; //TODO añadir números
         this.letras = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ .,?:-!"1234567890';
-        /*this.morse = new Array(
-            ".- ", "-... ", "-.-. ", "-.. ", ". ", "..-. ",
-            "-. ", ".... ", ".. ", ".- ", "-.- ", ".-.. ",
-            "- ", "-. ", "-.- ", "- ", ".-. ", "-.- ", ".-. ",
-            "... ", "- ", "..- ", "...- ", ".- ", "-..- ",
-            "-.- ", "-.. ", ".- ", "-... ", "-.-. ", "-.. ", ". ", "..-. ", "-. ", ".... ", ".. ", ".- ",
-            "-.- ", ".-.. ", "- ", "-. ", "-.- ", "- ", ".-. ",
-            "-.- ", ".-. ", "... ", "- ", "..- ", "...- ",
-            ".- ", "-..- ", "-.- ", "-.. ", " / ", ".-.-.- ",
-            "-..- ", "..-.. ", "-... ", "-....- ", "!");*/
         this.morse = new Array(
             '.- ', '-... ', '-.-. ', '-.. ', '. ', '..-. ', '--. ', '.... ',
             '.. ', '.--- ', '-.- ', '.-.. ', '-- ', '-. ', '--.-- ', '--- ', '.--. ',
@@ -69,6 +85,11 @@ class Traductor {
 
     }
 
+    /**
+     * Presenta el texto original y la traducción en las respectivas
+     * areas de texto una vez ha procesado el cálculo de la traducción.
+     * Crea un objeto Morse al cual le pasa el resultado del texto codificado en morse
+     */
     traducir() {
 
         var resultado = "";
@@ -130,6 +151,10 @@ class Morse {
                 case '.':
 
                     this.subirGanacia(tiempo);
+                    
+                    //Extensión futura sincronizando vibraciones largas y cortas
+                    //en dispositivos compatibles con la API Vibration
+
                     /*if (window.navigator && window.navigator.vibrate) {
                         navigator.vibrate(80); // API Vibration
                      } else {
@@ -172,6 +197,8 @@ class Morse {
 /**
  * Funcionalidad para aceptar archivos arrastrados a la página en lugar
  * de cargarlos mediante el explorador de archivos
+ * 
+ * Carga archivos desde la máquina cliente usando la API Drag and Drop
  */
 class DragDropManager {
     dropHandler(ev) {
@@ -185,7 +212,7 @@ class DragDropManager {
                     var file = ev.dataTransfer.items[i].getAsFile();
                     console.log('... file[' + i + '].name = ' + file.name);
                     //document.getElementById("drop_zone").placeholder = file.name;
-                    lector.leerArchivoAudio(ev.dataTransfer.files);
+                    lector.leerArchivo(ev.dataTransfer.files);
                 }
             }
         } 

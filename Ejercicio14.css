@@ -1,11 +1,23 @@
 body, label, textarea{
   display:block;
+  margin: 1em;
 }
 
 #drop_zone {
     border: thin dotted grey;
     width:  20em;
     height: 8em;
+}
+
+section{
+  background-color: rgb(243, 245, 245);
+  border: thin solid grey;
+  padding: 1em;
+  margin: 0.3em;
+}
+
+main{
+  display:flex;
 }
 
 textarea {
