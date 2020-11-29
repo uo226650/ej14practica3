@@ -1,15 +1,19 @@
 body, label, textarea{
-    display:block;
+  display:block;
 }
 
 #drop_zone {
     border: thin dotted grey;
     width:  20em;
     height: 8em;
-  }
+}
 
-  textarea {
-    overflow: scroll;
-      height: auto;
-      width: 40em;
-  }
+textarea {
+  overflow: scroll;
+  height: auto;
+  width: 40em;
+}
+
+span {
+  color: red;
+}

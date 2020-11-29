@@ -9,13 +9,22 @@ class Lector {
         var tipoTexto = /text.*/;
         if (this.archivo.type.match(tipoTexto)) {
             this.cargaContenido();
+            document.getElementById("drop_zone").placeholder = this.archivo.name;
+            
+            //Elimina el mensaje de error creado con anterioridad si existiera
+            if (document.getElementsByTagName("span").length != 0){
+                document.getElementsByTagName("span")[0].parentNode.removeChild(document.getElementsByTagName("span")[0]); //Elimina el elemento del DOM por completo
+            }
         }
         else {
-            var error = document.createElement("p");
+            //Crea un elemento para mostrar el mensaje de error
+            var error = document.createElement("span");
             error.innerText="El contenido de este archivo no se puede traducir debido a su formato";
             document.getElementById("drop_zone").after(error);
+            
+            //Limpia el placeholder en caso de que tenga el nombre del archivo anteriormente cargado
+            document.getElementById("drop_zone").placeholder = "Arrastra y suelta un archivo de texto a esta zona ...";
         }
-        //this.cargaContenido();
     }
 
     cargaContenido() {
@@ -24,8 +33,7 @@ class Lector {
             traductor = new Traductor(lector.result);
             traductor.traducir();
         }
-        lector.readAsText(this.archivo);
-        
+        lector.readAsText(this.archivo);    
     }
 
 }
