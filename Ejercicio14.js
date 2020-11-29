@@ -126,18 +126,18 @@ class Morse {
                     this.bajarGanacia(tiempo+= this.duracion); //Baja ganancia transcurrida la duración
                     tiempo += this.duracion;
                     if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(80); // API Vibration
+                        navigator.vibrate(); // API Vibration
                      } else {
                         alert("Vibración no soportada");
                      }
                     break;
 
                 case '-':
-
+                    navigator.vibrate(0);
                     this.subirGanacia(tiempo); //Sube la ganancia ahora
                     tiempo += 3 * this.duracion; //Tres veces la duración del punto
                     if (window.navigator && window.navigator.vibrate) {
-                        navigator.vibrate(240); // API Vibration
+                        navigator.vibrate(); // API Vibration
                      } else {
                         alert("Vibración no soportada");
                      }
@@ -146,7 +146,7 @@ class Morse {
                     break;
 
                 case " ":
-
+                    navigator.vibrate(0);
                     tiempo += 7 * this.duracion;
                     break;
             }
