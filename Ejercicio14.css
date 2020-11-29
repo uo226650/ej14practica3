@@ -29,3 +29,13 @@ textarea {
 span {
   color: red;
 }
+
+@media screen and (max-width: 600px) {
+  main{
+    display: block;
+  }
+
+  textarea, #drop_zone, input{
+    width: 100%;
+  }
+}
