@@ -1,3 +1,4 @@
+/*Redefinición de main, textarea y drop_zone en las media queries intencionados*/
 body, label, textarea{
   display:block;
   margin: 1em;
