@@ -117,9 +117,6 @@ class Traductor {
 class Morse {
 
     constructor(texto) {
-        if (this.audioContext === undefined) {
-            this.crearContexto();
-        }
         this.texto = texto;
     }
 
@@ -142,6 +139,7 @@ class Morse {
 
 
     reproducir() {
+        this.crearContexto();
         var array = this.texto.split("");
         var tiempo = this.audioContext.currentTime;
         array.forEach(function (letra) {
@@ -190,6 +188,10 @@ class Morse {
 
     bajarGanacia(momento) {
         this.ganancia.gain.setValueAtTime(0, momento);
+    }
+
+    parar(){
+        this.tono.stop(this.audioContext.currentTime);
     }
 
 }
